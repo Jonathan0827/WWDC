@@ -1,5 +1,14 @@
 #!/bin/sh
+
+#echo ${fileList}
 for file in $(pwd)/Xcodeproj/NotIM/*
 do
-  echo "$file"
+  #echo $file
+  if echo "$file" | grep -q "Preview Content"
+  then
+    echo pre
+  else
+    #echo $file
+    cp -f "${file}"  "$(pwd)/NotIM.swiftpm/"
+  fi
 done

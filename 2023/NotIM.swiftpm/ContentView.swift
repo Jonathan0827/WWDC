@@ -19,10 +19,7 @@ struct ContentView: View {
                 }, label: {
                     Text("console")
                 })
-                NavigationLink(destination: {ExportView()}, label: {
-                    Text("This Is iPA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                })
-                Spacer()
+
 //                Button(action: {isFirstLaunching = true}, label: {Text("reset")})
                 if fileArray == [] || fileArray == [".DS_Store"] {
                     Text("No note available.")
@@ -73,6 +70,7 @@ struct ContentView: View {
                             //                        }
                         }
                     }
+                    .background(.background)
                 }
                 Spacer()
                 if userIsAuthorized{
@@ -105,7 +103,7 @@ struct ContentView: View {
 
             .onAppear {                
                 findContents()
-//                visibleConsole(consoleIsEnabled)
+                visibleConsole(consoleIsEnabled)
                 let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
                 cprint("Document Dir is")
                 cprint(documentDirectoryUrl?.appendingPathComponent("NotIM"))
