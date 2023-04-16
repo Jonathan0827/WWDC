@@ -1,0 +1,16 @@
+{
+    "META": {
+        "repoName": "Jonathan's WWDC",
+        "repoIcon": "https://avatars.githubusercontent.com/u/74815888?v=4"
+    },
+    "App": [{
+        "name": "NotIM",
+        "version": "0.3 Beta",
+        "icon": "",
+        "down": "https://jonathan.kro.kr/WWDC/2023/build/NotIM.ipa",
+        "description": "Note IMproved",
+        "bundleID": "com.jonathan.NotIM",
+        "category": "Note",
+        "changelog": "- Initial Commit"
+    }]
+}
