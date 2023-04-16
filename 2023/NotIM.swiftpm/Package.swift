@@ -16,8 +16,6 @@ let package = Package(
         .iOSApplication(
             name: "NotIM",
             targets: ["AppModule"],
-            bundleIdentifier: "com.jonathan.NotIM",
-            teamIdentifier: "WF4J3YQN3K",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
@@ -39,7 +37,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/duraidabdul/LocalConsole/", "1.0.0"..<"2.0.0")
+        .package(url: "https://github.com/duraidabdul/LocalConsole", "1.0.0"..<"2.0.0")
     ],
     targets: [
         .executableTarget(
