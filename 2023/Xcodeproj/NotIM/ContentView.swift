@@ -141,6 +141,7 @@ struct ContentView: View {
             let contents = try fileManager.contentsOfDirectory(atPath: fileURL.path)
             print(contents)
             fileArray = contents
+            cprint(contents)
         } catch let error as NSError {
             print("Error access directory: \(error)")
         }

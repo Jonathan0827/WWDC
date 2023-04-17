@@ -7,13 +7,17 @@
 
 import SwiftUI
 import LocalAuthentication
+import UniformTypeIdentifiers
 import Combine
+
 struct NoteEditorView: View {
     enum FocusedField {
             case firstName, lastName
     }
     @Binding var fileArray: [String]
     @State var title: String
+    @State private var jsonData = Data()
+
     @State private var noteBody: String = ""
     @State private var noteTitle: String = ""
     @State private var showSettings: Bool = false
@@ -21,6 +25,7 @@ struct NoteEditorView: View {
     @Binding var userIsAuthorized: Bool
     @Binding var MoveHere: Bool
     @State var noteIsLocked: Bool = false
+    @State var shareNote: Bool = false
     @Binding var noteList: [String]
     @State private var NoteTitleWithoutDotJson: String = ""
     @State private var NoteIsLockedAndIsNotUnlocked: Bool = false
@@ -135,29 +140,31 @@ struct NoteEditorView: View {
                         Image(systemName: "gear")
                     })
                 }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//
+//                    Button(action: {
+//                        deleteJsonData(title: title)
+//                        let fileManager = FileManager()
+//                        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+//                        let fileURL = path.appendingPathComponent("NotIM")
+//
+//                        do {
+//                            let contents = try fileManager.contentsOfDirectory(atPath: fileURL.path)
+//                            cprint(contents)
+//                            noteList = contents
+//                        } catch let error as NSError {
+//                            print("Error access directory: \(error)")
+//                        }
+//                    }, label: {
+//                        Image(systemName: "trash")
+//                    })
+//                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    
                     Button(action: {
-                        deleteJsonData(title: title)
-                        let fileManager = FileManager()
-                        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-                        let fileURL = path.appendingPathComponent("NotIM")
-        
-                        do {
-                            let contents = try fileManager.contentsOfDirectory(atPath: fileURL.path)
-                            print(contents)
-                            noteList = contents
-                        } catch let error as NSError {
-                            print("Error access directory: \(error)")
-                        }
-                    }, label: {
-                        Image(systemName: "trash")
-                    })
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    
-                    Button(action: {
-                        print("Share")
+                        cprint("Share")
+                        shareNote = true
+                        self.exportJSON()
+
                     }, label: {
                         Image(systemName: "square.and.arrow.up")
                     })
@@ -222,6 +229,11 @@ struct NoteEditorView: View {
                 }
                 
             }
+            .sheet(isPresented: Binding<Bool>(
+                            get: { return self.jsonData.count > 0 },
+                            set: { _ in })) {
+                        ShareSheet(activityItems: [self.jsonData])
+                    }
             .sheet(isPresented: $showSettings) {
                 VStack {
                     List() {
@@ -241,5 +253,41 @@ struct NoteEditorView: View {
         let tc = title.count
         let titleWithoutDotJson = title.prefix(tc - 5)
         NoteTitleWithoutDotJson = String(titleWithoutDotJson)
+    }
+    private func exportJSON() {
+        let jsongDecoder = JSONDecoder()
+        var data: Data
+        do {
+            let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    //            let path = Bundle.main.resourcePath!
+    //            let documentDirectoryUrl = URL(string: path)
+            let fileURL = documentDirectoryUrl!.appendingPathComponent("NotIM/\(title)")
+            print(fileURL)
+            let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
+            self.jsonData = jsonData
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // Show share sheet
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
+        catch {
+            print(error)
+            
+        }
+
+        
+    }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
     }
 }
