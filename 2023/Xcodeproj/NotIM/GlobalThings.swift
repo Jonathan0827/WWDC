@@ -67,7 +67,7 @@ func deleteJsonData(title: String) {
     
 }
 func loadJsonFile(title: String) -> newNote?{
-    let jsongDecoder = JSONDecoder()
+    let jsonDecoder = JSONDecoder()
     do {
         guard let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil}
 //            let path = Bundle.main.resourcePath!
@@ -76,7 +76,7 @@ func loadJsonFile(title: String) -> newNote?{
         print(fileURL)
         let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
         
-        let decodedNotes = try jsongDecoder.decode(newNote.self, from: jsonData)
+        let decodedNotes = try jsonDecoder.decode(newNote.self, from: jsonData)
 //        print(decodedNotes)
         return decodedNotes
     }

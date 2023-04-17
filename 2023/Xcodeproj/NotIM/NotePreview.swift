@@ -171,7 +171,7 @@ struct NoteListPreview: View {
     }
     func makePreview() {
         let noteJson = loadJsonFile(title: title)
-        let titleLeng = title.count-5
+        let titleLeng = title.count-6
         let titleWithoutDotJson = title.prefix(titleLeng)
         noteTitle = String(titleWithoutDotJson)
         df.dateFormat = "yyyy/MM/dd"

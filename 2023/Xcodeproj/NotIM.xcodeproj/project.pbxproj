@@ -14,7 +14,6 @@
 		91E351FA29EC064100AB8E87 /* GlobalThings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E351F329EC064100AB8E87 /* GlobalThings.swift */; };
 		91E351FB29EC064100AB8E87 /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E351F429EC064100AB8E87 /* NewMemoView.swift */; };
 		91E351FC29EC064100AB8E87 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E351F529EC064100AB8E87 /* NoteEditorView.swift */; };
-		91EE752F29EBDEB80031BDD1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EE752E29EBDEB80031BDD1 /* ContentView.swift */; };
 		91EE753129EBDEBB0031BDD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91EE753029EBDEBB0031BDD1 /* Assets.xcassets */; };
 		91EE753429EBDEBB0031BDD1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91EE753329EBDEBB0031BDD1 /* Preview Assets.xcassets */; };
 		91EE753E29EBDEBB0031BDD1 /* NotIMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EE753D29EBDEBB0031BDD1 /* NotIMTests.swift */; };
@@ -48,8 +47,8 @@
 		91E351F329EC064100AB8E87 /* GlobalThings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalThings.swift; sourceTree = "<group>"; };
 		91E351F429EC064100AB8E87 /* NewMemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		91E351F529EC064100AB8E87 /* NoteEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
+		91E351FD29ED38F300AB8E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		91EE752929EBDEB80031BDD1 /* NotIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotIM.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		91EE752E29EBDEB80031BDD1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		91EE753029EBDEBB0031BDD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91EE753329EBDEBB0031BDD1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		91EE753929EBDEBB0031BDD1 /* NotIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotIMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +107,7 @@
 		91EE752B29EBDEB80031BDD1 /* NotIM */ = {
 			isa = PBXGroup;
 			children = (
-				91EE752E29EBDEB80031BDD1 /* ContentView.swift */,
+				91E351FD29ED38F300AB8E87 /* Info.plist */,
 				91E351F129EC064100AB8E87 /* ContentView.swift */,
 				91E351F329EC064100AB8E87 /* GlobalThings.swift */,
 				91E351F429EC064100AB8E87 /* NewMemoView.swift */,
@@ -284,7 +283,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91E351FB29EC064100AB8E87 /* NewMemoView.swift in Sources */,
-				91EE752F29EBDEB80031BDD1 /* ContentView.swift in Sources */,
 				91E351F629EC064100AB8E87 /* OnboardingView.swift in Sources */,
 				91E351F829EC064100AB8E87 /* ContentView.swift in Sources */,
 				91E351F729EC064100AB8E87 /* NotePreview.swift in Sources */,
@@ -452,6 +450,7 @@
 				DEVELOPMENT_TEAM = WF4J3YQN3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotIM/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Will be used to lock notes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -463,7 +462,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "1.0 alpha";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonathan.NotIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -483,6 +482,7 @@
 				DEVELOPMENT_TEAM = WF4J3YQN3K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotIM/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Will be used to lock notes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -494,7 +494,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "1.0 alpha";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonathan.NotIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

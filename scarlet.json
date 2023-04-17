@@ -5,12 +5,12 @@
     },
     "App": [{
         "name": "NotIM",
-        "version": "0.3 Beta",
+        "version": "1.0 Alpha",
         "icon": "",
         "down": "https://jonathan.kro.kr/WWDC/2023/build/NotIM.ipa",
         "description": "Note IMproved",
         "bundleID": "com.jonathan.NotIM",
         "category": "Note",
-        "changelog": "- Initial Commit"
+        "changelog": "- Add sharing"
     }]
 }

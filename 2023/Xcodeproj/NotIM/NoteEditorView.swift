@@ -14,10 +14,10 @@ struct NoteEditorView: View {
     enum FocusedField {
             case firstName, lastName
     }
+
     @Binding var fileArray: [String]
     @State var title: String
-    @State private var jsonData = Data()
-
+    @State private var ShareData: ShareFile?
     @State private var noteBody: String = ""
     @State private var noteTitle: String = ""
     @State private var showSettings: Bool = false
@@ -162,9 +162,25 @@ struct NoteEditorView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         cprint("Share")
-                        shareNote = true
-                        self.exportJSON()
-
+//                        shareNote = true
+//                        do {
+//                            let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+//                    //            let path = Bundle.main.resourcePath!
+//                    //            let documentDirectoryUrl = URL(string: path)
+//                            let fileURL = documentDirectoryUrl!.appendingPathComponent("NotIM/\(title)")
+//                            print(fileURL)
+//                            let jsonData = try String(contentsOf: fileURL)
+//                    //        print(decodedNotes)
+//                            ShareData = ShareFile(data: jsonData)
+//
+//                        }
+//                        catch {
+//                            cprint(NSError.self)
+//                        }
+                        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent(title)
+                        
+                        let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+                        UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
                     }, label: {
                         Image(systemName: "square.and.arrow.up")
                     })
@@ -229,11 +245,9 @@ struct NoteEditorView: View {
                 }
                 
             }
-            .sheet(isPresented: Binding<Bool>(
-                            get: { return self.jsonData.count > 0 },
-                            set: { _ in })) {
-                        ShareSheet(activityItems: [self.jsonData])
-                    }
+            .sheet(item: $ShareData) { ShareData in
+                ShareView(data: ShareData.data)
+            }
             .sheet(isPresented: $showSettings) {
                 VStack {
                     List() {
@@ -251,11 +265,11 @@ struct NoteEditorView: View {
     }
     func GetNoteTitle() {
         let tc = title.count
-        let titleWithoutDotJson = title.prefix(tc - 5)
+        let titleWithoutDotJson = title.prefix(tc - 6)
         NoteTitleWithoutDotJson = String(titleWithoutDotJson)
     }
     private func exportJSON() {
-        let jsongDecoder = JSONDecoder()
+        let jsonDecoder = JSONDecoder()
         var data: Data
         do {
             let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
@@ -264,7 +278,7 @@ struct NoteEditorView: View {
             let fileURL = documentDirectoryUrl!.appendingPathComponent("NotIM/\(title)")
             print(fileURL)
             let jsonData = try Data(contentsOf: fileURL, options: .mappedIfSafe)
-            self.jsonData = jsonData
+//            self.jsonData = jsonData
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // Show share sheet
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -280,14 +294,18 @@ struct NoteEditorView: View {
     }
 }
 
-struct ShareSheet: UIViewControllerRepresentable {
-    let activityItems: [Any]
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        return controller
+struct ShareView: UIViewControllerRepresentable {
+    let data: String
+//    let jsonData = JSON
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ShareView>) -> UIActivityViewController {
+        
+        return UIActivityViewController(activityItems: [data], applicationActivities: nil)
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ShareView>) {}
+}
+
+struct ShareFile: Identifiable {
+    let id = UUID()
+    let data: String
 }

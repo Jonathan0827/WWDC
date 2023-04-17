@@ -70,7 +70,7 @@ struct NewMemoView: View {
 
                         do {
                             let contents = try fileManager.contentsOfDirectory(atPath: fileURL.path)
-                            if contents.contains("\(title).json") {
+                            if contents.contains("\(title).notim") {
                                 showExistErr = true
                             } else {
                                 var authorName = ""
@@ -79,8 +79,8 @@ struct NewMemoView: View {
                                 } else {
                                     authorName = author
                                 }
-                                saveJsonData(data: newNote(title: title, date: Date(), data: "", author: authorName, locked: false), title: "\(title).json")
-                                cprint("created file \(title).json")
+                                saveJsonData(data: newNote(title: title, date: Date(), data: "", author: authorName, locked: false), title: "\(title).notim")
+                                cprint("created file \(title).notim")
                                 createNote = false
                                 let contents = try fileManager.contentsOfDirectory(atPath: fileURL.path)
                                 fileArray = contents
