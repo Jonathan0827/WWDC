@@ -5,7 +5,6 @@ git commit -m "$1"
 git push
 
 ./2023/makePlayground
-cd ..
 git add .
 git commit -m "Auto-Playground"
 git push
